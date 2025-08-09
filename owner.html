@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Owner Orders</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #0C3B2E;
+      margin-bottom: 30px;
+    }
+
+    .order-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .order-card {
+      background: #fff;
+      padding: 20px;
+      border-left: 6px solid #6D9773;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .order-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .order-card h2 {
+      margin-top: 0;
+      color: #BB8A52;
+    }
+
+    .address {
+      margin: 10px 0;
+      font-size: 14px;
+      color: #333;
+    }
+
+    button {
+      background-color: #FFBA00;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #e0a800;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Your Orders</h1>
+  <div class="order-list" id="orderList"></div>
+
+  <script>
+    const orders = [
+      {
+        item: "Grocery Bag",
+        customer: "Ramalayam Street, Vempalle",
+        status: "Pending"
+      },
+      {
+        item: "Paint Kit",
+        customer: "Agriculture Colony, Chennur",
+        status: "Pending"
+      },
+      {
+        item: "Vegetable Basket",
+        customer: "Panchayat Office, Mydukur",
+        status: "Pending"
+      }
+    ];
+
+    const orderList = document.getElementById("orderList");
+
+    orders.forEach((order, index) => {
+      const card = document.createElement("div");
+      card.className = "order-card";
+      card.innerHTML = `
+        <h2>Order #${index + 1}</h2>
+        <p><strong>Item:</strong> ${order.item}</p>
+        <p class="address"><strong>Customer Address:</strong><br>${order.customer}</p>
+        <button onclick="markPacked(${index})">Mark as Packed</button>
+      `;
+      orderList.appendChild(card);
+    });
+
+    function markPacked(index) {
+      window.location.href = "packed.html";
+    }
+  </script>
+
+</body>
+</html>

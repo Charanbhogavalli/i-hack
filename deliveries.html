@@ -1,0 +1,115 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Available Deliveries</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #0C3B2E; /* dark green */
+      margin-bottom: 30px;
+    }
+
+    .order-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .order-card {
+      background: #ffffff;
+      padding: 20px;
+      border-left: 6px solid #6D9773; /* green stripe */
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .order-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .order-card h2 {
+      margin-top: 0;
+      color: #BB8A52; /* brown */
+    }
+
+    .address {
+      margin: 10px 0;
+      font-size: 14px;
+      color: #333;
+    }
+
+    button {
+      background-color: #FFBA00; /* yellow/orange */
+      color: #0C3B2E; /* dark green */
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #e0a800; /* darker yellow */
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Available Deliveries</h1>
+  <div class="order-list" id="orderList"></div>
+
+  <script>
+    const orders = [
+      {
+        category: "Grocery",
+        shop: "Reddy Kirana Store",
+        pickup: "Reddy Kirana Store, Market Road, Pulivendula, Andhra Pradesh",
+        drop: "Door No. 1-23, Ramalayam Street, Vempalle, Andhra Pradesh"
+      },
+      {
+        category: "Hardware",
+        shop: "Sai Durga Hardware",
+        pickup: "Sai Durga Hardware, Bus Stand Road, Muddanur, Andhra Pradesh",
+        drop: "5th Cross, Agriculture Colony, Chennur, Andhra Pradesh"
+      },
+      {
+        category: "Vegetables",
+        shop: "Fresh Veggies Mart",
+        pickup: "Fresh Veggies Mart, Main Bazaar, Kadapa, Andhra Pradesh",
+        drop: "House No. 6-89, Near Panchayat Office, Mydukur, Andhra Pradesh"
+      }
+    ];
+
+    const orderList = document.getElementById("orderList");
+
+    orders.forEach((order, index) => {
+      const card = document.createElement("div");
+      card.className = "order-card";
+      card.innerHTML = `
+        <h2>${order.shop}</h2>
+        <p><strong>Category:</strong> ${order.category}</p>
+        <p class="address"><strong>Pickup:</strong><br>${order.pickup}</p>
+        <p class="address"><strong>Drop:</strong><br>${order.drop}</p>
+        <button onclick="acceptOrder(${index})">Accept Delivery</button>
+      `;
+      orderList.appendChild(card);
+    });
+
+    function acceptOrder(index) {
+      localStorage.setItem("acceptedOrder", JSON.stringify(orders[index]));
+      window.location.href = "order.html";
+    }
+  </script>
+
+</body>
+</html>

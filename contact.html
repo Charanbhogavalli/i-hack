@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #F8F9FA;
+        margin: 0;
+        padding: 20px;
+        color: #0C3B2E;
+    }
+    .contact-card {
+        background: #fff;
+        border-radius: 20px;
+        padding: 25px;
+        max-width: 500px;
+        margin: auto;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #0C3B2E;
+    }
+    .info {
+        margin-bottom: 20px;
+        padding: 15px;
+        border-radius: 12px;
+        background: #6D9773;
+        color: white;
+    }
+    .info p {
+        margin: 8px 0;
+        font-size: 15px;
+    }
+    .info p strong {
+        color: #FFBA00;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+    input, textarea {
+        margin-bottom: 15px;
+        padding: 12px;
+        border: 1px solid #BB8A52;
+        border-radius: 8px;
+        font-size: 14px;
+    }
+    textarea {
+        resize: none;
+        height: 100px;
+    }
+    button {
+        background: #0C3B2E;
+        color: white;
+        border: none;
+        padding: 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: bold;
+        transition: background 0.3s;
+    }
+    button:hover {
+        background: #6D9773;
+    }
+</style>
+</head>
+<body>
+
+<div class="contact-card">
+    <h2>Contact Us</h2>
+
+    <div class="info">
+        <p><strong>Company:</strong> Fast Delivery Services</p>
+        <p><strong>Address:</strong> 123 Main Street, Kadapa, AP, India</p>
+        <p><strong>Email:</strong> support@fastdelivery.com</p>
+        <p><strong>Phone:</strong> +91 98765 43210</p>
+    </div>
+
+    <form onsubmit="sendMessage(event)">
+        <input type="text" id="name" placeholder="Your Name" required>
+        <input type="email" id="email" placeholder="Your Email" required>
+        <textarea id="message" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+    </form>
+</div>
+
+<script>
+function sendMessage(e) {
+    e.preventDefault();
+    alert("Thank you! Your message has been sent.");
+    document.querySelector("form").reset();
+}
+</script>
+
+</body>
+</html>

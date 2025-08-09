@@ -1,0 +1,85 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Accepted Order Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      padding: 40px;
+    }
+
+    .order-box {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    h2 {
+      text-align: center;
+      color: #007BFF;
+      margin-bottom: 25px;
+    }
+
+    p {
+      font-size: 16px;
+      margin: 10px 0;
+    }
+
+    .label {
+      font-weight: bold;
+    }
+
+    .error {
+      color: red;
+      text-align: center;
+    }
+
+    a {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #007BFF;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="order-box" id="orderBox">
+    <h2>Order Details</h2>
+    <div id="orderDetails">
+      <p class="error">Loading...</p>
+    </div>
+    <a href="deliveries.html">← Back to Deliveries</a>
+  </div>
+
+  <script>
+    const orderData = localStorage.getItem("acceptedOrder");
+    const order = orderData ? JSON.parse(orderData) : null;
+    const detailsDiv = document.getElementById("orderDetails");
+
+    if (order) {
+      detailsDiv.innerHTML = `
+        <p><span class="label">Shop:</span> ${order.shop}</p>
+        <p><span class="label">Category:</span> ${order.category}</p>
+        <p><span class="label">Pickup Address:</span><br>${order.pickup}</p>
+        <p><span class="label">Drop Address:</span><br>${order.drop}</p>
+      `;
+    } else {
+      detailsDiv.innerHTML = `
+        <p class="error">⚠ No order found. Please accept a delivery first.</p>
+      `;
+    }
+  </script>
+
+</body>
+</html>

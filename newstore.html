@@ -1,0 +1,73 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>New Store Registration</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #FFBA00; /* Yellow */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .form-box {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      width: 350px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+      text-align: center;
+      color: #0C3B2E; /* Dark green */
+      margin-bottom: 20px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #0C3B2E; /* Dark green */
+      border: none;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0a2f24;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-box">
+    <h2>Register New Store</h2>
+    <form action="confirmation.html" method="GET">
+      <input type="text" name="owner_name" placeholder="Owner's Full Name" required>
+      <input type="text" name="store_name" placeholder="Store Name" required>
+      <input type="text" name="store_type" placeholder="Type of Store (e.g., Grocery, Pharmacy)" required>
+      <input type="tel" name="phone" placeholder="Phone Number" required>
+      <input type="text" name="location" placeholder="Store Address/Location" required>
+      <button type="submit">Register Store</button>
+    </form>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Confirmation - Village Fast</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #F8F9FA;
+        padding: 20px;
+        text-align: center;
+    }
+    h1 {
+        color: #0C3B2E;
+    }
+    .section {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        max-width: 500px;
+        margin: auto;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+    th, td {
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+        text-align: center;
+    }
+    th {
+        background: #6D9773;
+        color: white;
+    }
+    .btn-home {
+        margin-top: 20px;
+        display: inline-block;
+        padding: 10px 20px;
+        background: #0C3B2E;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+    }
+    .btn-home:hover {
+        background: #6D9773;
+    }
+</style>
+</head>
+<body>
+
+<h1>Order Confirmation</h1>
+<div class="section">
+    <p>Thank you for your order! Here’s what you selected:</p>
+
+    <table id="orderTable">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <a href="supermarket.html" class="btn-home">Back to Shop</a>
+</div>
+
+<script>
+    // Get order data from localStorage
+    let orderData = localStorage.getItem("orderData");
+    if(orderData) {
+        orderData = JSON.parse(orderData);
+    } else {
+        orderData = {};
+    }
+
+    let tbody = document.querySelector("#orderTable tbody");
+
+    // If there are no items
+    if(Object.keys(orderData).length === 0) {
+        tbody.innerHTML = <tr><td colspan="2">No items ordered.</td></tr>;
+    } else {
+        for(let item in orderData) {
+            let row = document.createElement("tr");
+            let nameCell = document.createElement("td");
+            nameCell.textContent = item;
+            let qtyCell = document.createElement("td");
+            qtyCell.textContent = orderData[item];
+            row.appendChild(nameCell);
+            row.appendChild(qtyCell);
+            tbody.appendChild(row);
+        }
+    }
+</script>
+
+</body>
+</html>

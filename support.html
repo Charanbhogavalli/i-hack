@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Village Fast - Support</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #F8F9FA;
+        margin: 0;
+        padding: 20px;
+        color: #0C3B2E;
+    }
+    .support-card {
+        background: #fff;
+        border-radius: 20px;
+        padding: 25px;
+        max-width: 650px;
+        margin: auto;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 10px;
+        color: #0C3B2E;
+    }
+    p.subtitle {
+        text-align: center;
+        font-size: 15px;
+        margin-bottom: 20px;
+        color: #6D9773;
+    }
+    .contact-info {
+        background: #6D9773;
+        color: white;
+        padding: 15px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+    }
+    .contact-info p {
+        margin: 8px 0;
+    }
+    .contact-info strong {
+        color: #FFBA00;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+    input, textarea, select {
+        margin-bottom: 15px;
+        padding: 12px;
+        border: 1px solid #BB8A52;
+        border-radius: 8px;
+        font-size: 14px;
+    }
+    textarea {
+        resize: none;
+        height: 100px;
+    }
+    button {
+        background: #0C3B2E;
+        color: white;
+        border: none;
+        padding: 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: bold;
+        transition: background 0.3s;
+    }
+    button:hover {
+        background: #6D9773;
+    }
+    .faq {
+        margin-top: 25px;
+    }
+    .faq h2 {
+        color: #BB8A52;
+        margin-bottom: 10px;
+    }
+    .faq-item {
+        margin-bottom: 10px;
+    }
+    .faq-item strong {
+        color: #0C3B2E;
+    }
+</style>
+</head>
+<body>
+
+<div class="support-card">
+    <h1>Village Fast - Support</h1>
+    <p class="subtitle">We’re here to help you 24/7</p>
+
+    <div class="contact-info">
+        <p><strong>📍 Address:</strong> Village Fast HQ, Kadapa, AP, India</p>
+        <p><strong>📧 Email:</strong> support@villagefast.com</p>
+        <p><strong>📞 Phone:</strong> +91 98765 43210</p>
+    </div>
+
+    <form onsubmit="sendSupport(event)">
+        <select required>
+            <option value="">Select Issue Type</option>
+            <option>Delivery Problem</option>
+            <option>Payment Issue</option>
+            <option>App Bug</option>
+            <option>Other</option>
+        </select>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea placeholder="Describe your issue" required></textarea>
+        <button type="submit">Submit Request</button>
+    </form>
+
+    <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <strong>Q: How long does delivery take?</strong>
+            <p>A: Usually within 30-45 minutes in town areas.</p>
+        </div>
+        <div class="faq-item">
+            <strong>Q: Can I track my order?</strong>
+            <p>A: Yes! Use the “Track Order” option in the app.</p>
+        </div>
+        <div class="faq-item">
+            <strong>Q: Do you offer refunds?</strong>
+            <p>A: Yes, for incorrect or missing orders, processed within 3–5 days.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+function sendSupport(e) {
+    e.preventDefault();
+    alert("Thank you! Our support team will get back to you shortly.");
+    document.querySelector("form").reset();
+}
+</script>
+
+</body>
+</html>

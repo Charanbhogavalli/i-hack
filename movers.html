@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delivery Boy Login</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #F5F5F5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .login-card {
+        background-color: #FFFFFF;
+        border-radius: 20px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        width: 350px;
+        padding: 30px;
+        text-align: center;
+    }
+
+    h2 {
+        color: #0C3B2E;
+        margin-bottom: 20px;
+    }
+
+    input {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        background-color: #6D9773; /* Green from palette */
+        color: white;
+        font-size: 16px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background-color: #0C3B2E; /* Dark Green */
+    }
+
+    .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: #FFBA00;
+        margin-bottom: 20px;
+    }
+</style>
+</head>
+<body>
+
+<div class="login-card">
+    <div class="logo">Delivery Login</div>
+    <h2>Sign In</h2>
+    <input type="text" id="vehicle" placeholder="Vehicle Number" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button onclick="login()">Login</button>
+</div>
+
+<script>
+  function login() {
+    let vehicle = document.getElementById("vehicle").value;
+    let pass = document.getElementById("password").value;
+
+    if (vehicle.trim() !== "" && pass.trim() !== "") {
+      // ✅ Redirect to deliveries.html
+      window.location.href = "deliveries.html";
+    } else {
+      alert("Please fill in all fields");
+    }
+  }
+</script>
+
+</body>
+</html>

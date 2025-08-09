@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurant - Village Fast</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #F8F9FA;
+        padding: 20px;
+    }
+    h1 {
+        text-align: center;
+        color: #8B0000;
+    }
+    .section {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        max-width: 600px;
+        margin: auto;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    form {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+        flex-wrap: wrap;
+    }
+    input, button {
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
+    input[type="text"] {
+        flex: 2;
+    }
+    button {
+        background: #8B0000;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    button:hover {
+        background: #CD5C5C;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+        text-align: center;
+    }
+    th {
+        background: #CD5C5C;
+        color: white;
+    }
+    .qty-btn {
+        background: #8B0000;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        margin: 0 5px;
+    }
+    .qty-btn:hover {
+        background: #CD5C5C;
+    }
+    .order-btn {
+        display: block;
+        margin: 20px auto 0;
+        padding: 12px 20px;
+        font-size: 16px;
+        background: #8B0000;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+    .order-btn:hover {
+        background: #CD5C5C;
+    }
+</style>
+</head>
+<body>
+
+<h1>Restaurant Menu</h1>
+<div class="section">
+    <!-- Add Dish Form -->
+    <form id="itemForm">
+        <input type="text" id="itemName" placeholder="Enter dish name" required>
+        <button type="submit">Add</button>
+    </form>
+
+    <!-- Menu Table -->
+    <table id="itemTable">
+        <thead>
+            <tr>
+                <th>Dish</th>
+                <th>Quantity</th>
+                <th>Change</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <!-- Place Order Button -->
+    <button class="order-btn" onclick="placeOrder()">Place Order</button>
+</div>
+
+<script>
+// Default dishes
+let items = [
+    "Chicken Biryani", "Paneer Butter Masala", "Veg Fried Rice", "Mutton Curry", "Fish Fry",
+    "Masala Dosa", "Idli Sambar", "Pav Bhaji", "Butter Naan", "Gulab Jamun",
+    "Ice Cream", "Cold Coffee", "Pizza Margherita", "Veg Burger", "Spring Rolls"
+];
+
+// Store quantities (default 0)
+let quantities = {};
+items.forEach(item => quantities[item] = 0);
+
+// Render menu
+function renderTable() {
+    let tbody = document.querySelector("#itemTable tbody");
+    tbody.innerHTML = "";
+    items.forEach(item => {
+        let row = document.createElement("tr");
+
+        let nameCell = document.createElement("td");
+        nameCell.textContent = item;
+        
+        let qtyCell = document.createElement("td");
+        qtyCell.textContent = quantities[item];
+        
+        let controlCell = document.createElement("td");
+        let minusBtn = document.createElement("button");
+        minusBtn.textContent = "–";
+        minusBtn.classList.add("qty-btn");
+        minusBtn.onclick = () => {
+            if (quantities[item] > 0) quantities[item]--;
+            renderTable();
+        };
+
+        let plusBtn = document.createElement("button");
+        plusBtn.textContent = "+";
+        plusBtn.classList.add("qty-btn");
+        plusBtn.onclick = () => {
+            quantities[item]++;
+            renderTable();
+        };
+
+        controlCell.appendChild(minusBtn);
+        controlCell.appendChild(plusBtn);
+
+        row.appendChild(nameCell);
+        row.appendChild(qtyCell);
+        row.appendChild(controlCell);
+
+        tbody.appendChild(row);
+    });
+}
+
+// Add new dish
+document.getElementById("itemForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    let name = document.getElementById("itemName").value.trim();
+    if(name && !items.includes(name)) {
+        items.push(name);
+        quantities[name] = 0;
+        renderTable();
+        document.getElementById("itemForm").reset();
+    }
+});
+
+// Save and go to confirmation
+function placeOrder() {
+    localStorage.setItem("orderData", JSON.stringify(quantities));
+    window.location.href = "order1.html";
+}
+
+// Initial render
+renderTable();
+</script>
+
+</body>
+</html>

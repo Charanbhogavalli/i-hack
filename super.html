@@ -1,0 +1,202 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Super Market - Village Fast</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #F8F9FA;
+        padding: 20px;
+    }
+    h1 {
+        text-align: center;
+        color: #0C3B2E;
+    }
+    .section {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        max-width: 600px;
+        margin: auto;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    form {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+        flex-wrap: wrap;
+    }
+    input, button {
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
+    input[type="text"] {
+        flex: 2;
+    }
+    button {
+        background: #0C3B2E;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    button:hover {
+        background: #6D9773;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+        text-align: center;
+    }
+    th {
+        background: #6D9773;
+        color: white;
+    }
+    .qty-btn {
+        background: #0C3B2E;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        margin: 0 5px;
+    }
+    .qty-btn:hover {
+        background: #6D9773;
+    }
+    /* Order button styling */
+    .order-btn {
+        margin-top: 20px;
+        display: block;
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        font-weight: bold;
+        background: #FFBA00;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+    .order-btn:hover {
+        background: #e0a800;
+    }
+</style>
+</head>
+<body>
+
+<h1>Super Market - Daily Use Items</h1>
+<div class="section">
+    <!-- Add Item Form -->
+    <form id="itemForm">
+        <input type="text" id="itemName" placeholder="Enter item name" required>
+        <button type="submit">Add</button>
+    </form>
+
+    <!-- Items Table -->
+    <table id="itemTable">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Change</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <!-- Order Button -->
+    <button class="order-btn" onclick="placeOrder()">Place Order</button>
+</div>
+
+<script>
+// Default items
+let items = [
+    "Rice", "Wheat Flour", "Sugar", "Salt", "Cooking Oil", "Milk",
+    "Bread", "Tea Powder", "Coffee", "Eggs", "Onions", "Potatoes",
+    "Tomatoes", "Soap", "Toothpaste"
+];
+
+// Store quantities (default 0)
+let quantities = {};
+items.forEach(item => quantities[item] = 0);
+
+// Render table
+function renderTable() {
+    let tbody = document.querySelector("#itemTable tbody");
+    tbody.innerHTML = "";
+    items.forEach(item => {
+        let row = document.createElement("tr");
+
+        let nameCell = document.createElement("td");
+        nameCell.textContent = item;
+        
+        let qtyCell = document.createElement("td");
+        qtyCell.textContent = quantities[item];
+        
+        let controlCell = document.createElement("td");
+        let minusBtn = document.createElement("button");
+        minusBtn.textContent = "–";
+        minusBtn.classList.add("qty-btn");
+        minusBtn.onclick = () => {
+            if (quantities[item] > 0) quantities[item]--;
+            renderTable();
+        };
+
+        let plusBtn = document.createElement("button");
+        plusBtn.textContent = "+";
+        plusBtn.classList.add("qty-btn");
+        plusBtn.onclick = () => {
+            quantities[item]++;
+            renderTable();
+        };
+
+        controlCell.appendChild(minusBtn);
+        controlCell.appendChild(plusBtn);
+
+        row.appendChild(nameCell);
+        row.appendChild(qtyCell);
+        row.appendChild(controlCell);
+
+        tbody.appendChild(row);
+    });
+}
+
+// Add new item
+document.getElementById("itemForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    let name = document.getElementById("itemName").value.trim();
+    if(name && !items.includes(name)) {
+        items.push(name);
+        quantities[name] = 0; // Default to 0
+        renderTable();
+        document.getElementById("itemForm").reset();
+    }
+});
+
+// Place order function5
+function placeOrder() {
+    let selectedItems = {};
+    for (let item in quantities) {
+        if (quantities[item] > 0) {
+            selectedItems[item] = quantities[item];
+        }
+    }
+    localStorage.setItem("orderData", JSON.stringify(selectedItems));
+    window.location.href = "order1.html";
+}
+
+// Initial render
+renderTable();
+</script>
+
+</body>
+</html>
+ 
